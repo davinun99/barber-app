@@ -20,8 +20,20 @@ export default defineType({
       title: "Turno",
       type: "reference",
       to: [{ type: "turno" }]
+    }),
+    defineField({
+      name: "fechaReserva",
+      title: "Fecha de reserva",
+      type: "date",
+      hidden: true,
+      options: {
+        dateFormat: "DD/MM/YYYY"
+      }
     })
   ],
+  initialValue: {
+    fechaReserva: new Date()
+  },
   preview: {
     select: {
       fecha: "turno.fecha",
