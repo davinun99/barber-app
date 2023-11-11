@@ -79,13 +79,14 @@ const parsingTaxonomies = (taxonomies: SanityTaxonomy[], locale = "en-US"): Taxo
 const getAllReservas = async () => {
   const query = groq`*[_type == "reserva"]{
     cliente -> {
-      nombre, apellido
+      nombre, apellido, "foto": foto.asset->url
     },
     turno -> {
       fecha, hora
     },
-    fechaReserva
-  }`;
+    fechaReserva,
+    _id
+  } | order(turno.fecha asc, turno.hora asc)`;
   const reservas = await client.fetch<SanityReserva[]>(query);
   return reservas;
 };

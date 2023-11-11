@@ -66,9 +66,10 @@ export interface Cliente {
   nombre: string;
   apellido: string;
   ruc: string;
-  foto: Image;
+  foto?: string;
 }
 export interface Reserva {
+  _id: string;
   cliente: Cliente;
   turno: Turno;
   fechaReserva: string;

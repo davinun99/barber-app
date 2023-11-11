@@ -1,16 +1,15 @@
 "use client";
 
-import sanityApi from "@utils/sanity/api";
-import { Card } from "flowbite-react";
-import { GetStaticProps } from "next";
+import { Reserva } from "@typings/models";
+import { Card, Avatar } from "flowbite-react";
 import Image from "next/image";
 import React from "react";
+import { getDateFromStr } from "@utils/date";
 type Props = {
-  reservas: [];
+  reservas: Reserva[];
 };
 
 const ListaReservas: React.FC<Props> = ({ reservas }) => {
-  console.log({ reservas });
   return (
     <Card className="max-w-sm">
       <div className="mb-4 flex items-center justify-between">
@@ -26,126 +25,32 @@ const ListaReservas: React.FC<Props> = ({ reservas }) => {
       </div>
       <div className="flow-root">
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          <li className="py-3 sm:py-4">
-            <div className="flex items-center space-x-4">
-              <div className="shrink-0">
-                <Image
-                  alt="Neil image"
-                  height="32"
-                  src="/images/people/profile-picture-1.jpg"
-                  width="32"
-                  className="rounded-full"
-                />
+          {reservas.map(reserva => (
+            <li className="py-3 sm:py-4" key={reserva._id}>
+              <div className="flex items-center space-x-4">
+                <div className="shrink-0">
+                  { reserva.cliente.foto ? <Image
+                    alt="client image"
+                    height="32"
+                    src={reserva.cliente.foto}
+                    width="32"
+                    className="rounded-full"
+                  /> : <Avatar />}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
+                    {reserva.cliente.nombre} {reserva.cliente.apellido}
+                  </p>
+                  <p className="truncate text-sm text-gray-500 dark:text-gray-400">
+                    {getDateFromStr(reserva.turno.fecha).toLocaleDateString("es-PY", { weekday: "long", day: "2-digit" })}
+                  </p>
+                </div>
+                <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                  {reserva.turno.hora}:00 hs.
+                </div>
               </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
-                  Neil Sims
-                </p>
-                <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-                  email@windster.com
-                </p>
-              </div>
-              <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                $320
-              </div>
-            </div>
-          </li>
-          <li className="py-3 sm:py-4">
-            <div className="flex items-center space-x-4">
-              <div className="shrink-0">
-                <Image
-                  alt="Bonnie image"
-                  height="32"
-                  src="/images/people/profile-picture-3.jpg"
-                  width="32"
-                  className="rounded-full"
-                />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
-                  Bonnie Green
-                </p>
-                <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-                  email@windster.com
-                </p>
-              </div>
-              <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                $3467
-              </div>
-            </div>
-          </li>
-          <li className="py-3 sm:py-4">
-            <div className="flex items-center space-x-4">
-              <div className="shrink-0">
-                <Image
-                  alt="Michael image"
-                  height="32"
-                  src="/images/people/profile-picture-2.jpg"
-                  width="32"
-                  className="rounded-full"
-                />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
-                  Michael Gough
-                </p>
-                <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-                  email@windster.com
-                </p>
-              </div>
-              <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                $67
-              </div>
-            </div>
-          </li>
-          <li className="py-3 sm:py-4">
-            <div className="flex items-center space-x-4">
-              <div className="shrink-0">
-                <Image
-                  alt="Lana image"
-                  height="32"
-                  src="/images/people/profile-picture-4.jpg"
-                  width="32"
-                  className="rounded-full"
-                />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
-                  Lana Byrd
-                </p>
-                <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-                  email@windster.com
-                </p>
-              </div>
-              <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                $367
-              </div>
-            </div>
-          </li>
-          <li className="pb-0 pt-3 sm:pt-4">
-            <div className="flex items-center space-x-4">
-              <div className="shrink-0">
-                <Image
-                  alt="Thomas image"
-                  height="32"
-                  src="/images/people/profile-picture-5.jpg"
-                  width="32"
-                  className="rounded-full"
-                />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
-                  Thomes Lean
-                </p>
-                <p className="truncate text-sm text-gray-500 dark:text-gray-400">
-                  email@windster.com
-                </p>
-              </div>
-              <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                $2367
-              </div>
-            </div>
-          </li>
+            </li>
+          ))}
         </ul>
       </div>
     </Card>

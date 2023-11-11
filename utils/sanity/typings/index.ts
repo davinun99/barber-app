@@ -41,7 +41,8 @@ export interface SanityCliente extends Omit<Cliente, "nombre" | "apellido" | "ru
   ruc: Record<string, string>;
   foto: Record<string, any>;
 }
-export interface SanityReserva extends Omit<Reserva, "cliente" | "turno" | "fechaReserva"> {
+export interface SanityReserva extends Omit<Reserva, "cliente" | "turno" | "fechaReserva" | "_id"> {
+  _id: Record<string, string>;
   cliente: Record<string, string>;
   description: Record<string, string>;
   slug: Record<string, any>;

@@ -32,7 +32,7 @@ export default defineType({
     })
   ],
   initialValue: {
-    fechaReserva: new Date()
+    fechaReserva: new Date().toISOString().substring(0, 10)
   },
   preview: {
     select: {

@@ -1,5 +1,5 @@
 import React from "react";
-import { GetStaticProps } from "next";
+import { GetStaticProps, NextPage } from "next";
 import ListaReservas from "@components/ListaReservas";
 import Page from "@components/Page";
 import { Reserva } from "@typings/models";
@@ -29,4 +29,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
     revalidate: 60
   };
-}
+};
