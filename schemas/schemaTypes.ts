@@ -12,8 +12,14 @@ import localeString from "./locale/String";
 import localeText from "./locale/Text";
 import localeSlug from "./locale/Slug";
 import localeBlockContent from "./locale/BlockContent";
+import turno from "./turno";
+import cliente from "./cliente";
+import reserva from "./reserva";
 
-export default [
+const types = [
+  turno,
+  cliente,
+  reserva,
   blockContent,
   country,
   catalog,
@@ -28,3 +34,5 @@ export default [
   localeSlug,
   localeBlockContent
 ];
+
+export default types;
