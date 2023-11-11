@@ -58,3 +58,18 @@ export interface SelectorObject {
   code: string;
   imageUrl: string;
 }
+export interface Turno {
+  fecha: string;
+  hora: string;
+}
+export interface Cliente {
+  nombre: string;
+  apellido: string;
+  ruc: string;
+  foto: Image;
+}
+export interface Reserva {
+  cliente: Cliente;
+  turno: Turno;
+  fechaReserva: string;
+}

@@ -4,6 +4,7 @@ import { Product, Taxon, Taxonomy, Variant } from "@typings/models";
 import {
   SanityCountry,
   SanityProduct,
+  SanityReserva,
   SanityTaxon,
   SanityTaxonomy,
   SanityVariant
@@ -74,6 +75,19 @@ const parsingTaxonomies = (taxonomies: SanityTaxonomy[], locale = "en-US"): Taxo
     return { ...taxonomy, ...localization };
   });
   return items;
+};
+const getAllReservas = async () => {
+  const query = groq`*[_type == "reserva"]{
+    cliente -> {
+      nombre, apellido
+    },
+    turno -> {
+      fecha, hora
+    },
+    fechaReserva
+  }`;
+  const reservas = await client.fetch<SanityReserva[]>(query);
+  return reservas;
 };
 
 const getAllCountries = async (locale = "en-US") => {
@@ -155,7 +169,8 @@ const getProduct = async (slug: string, locale = "en-US") => {
 const sanityApi: Record<string, any> = {
   getAllCountries,
   getAllTaxonomies,
-  getProduct
+  getProduct,
+  getAllReservas
 };
 
 export default sanityApi;

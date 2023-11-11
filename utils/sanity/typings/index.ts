@@ -1,4 +1,4 @@
-import { Country, Product, Size, Taxon, Taxonomy, Variant } from "@typings/models";
+import { Cliente, Country, Product, Reserva, Size, Taxon, Taxonomy, Turno, Variant } from "@typings/models";
 
 export interface SanityCountry extends Omit<Country, "name"> {
   name: Record<string, string>;
@@ -30,4 +30,20 @@ export interface SanityVariant extends Omit<Variant, "name" | "size"> {
 
 export interface SanitySize extends Omit<Size, "name"> {
   name: Record<string, any>;
+}
+export interface SanityTurno extends Omit<Turno, "fecha" | "hora">{
+  fecha: Record<string, string>;
+  hora: Record<string, string>;
+}
+export interface SanityCliente extends Omit<Cliente, "nombre" | "apellido" | "ruc" | "foto"> {
+  nombre: Record<string, string>;
+  apellido: Record<string, string>;
+  ruc: Record<string, string>;
+  foto: Record<string, any>;
+}
+export interface SanityReserva extends Omit<Reserva, "cliente" | "turno" | "fechaReserva"> {
+  cliente: Record<string, string>;
+  description: Record<string, string>;
+  slug: Record<string, any>;
+  variants: SanityVariant[];
 }
